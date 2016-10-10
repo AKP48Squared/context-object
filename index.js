@@ -35,6 +35,8 @@ function CustomDataError(msg) {
 require('util').inherits(MissingValueError, Error);
 require('util').inherits(CustomDataError, Error);
 
+const webURLRegex = require('./URLRegex');
+
 function isCommand(delimiters, text) {
   for (var i = 0; i < delimiters.length; i++) {
     if(text.startsWith(delimiters[i])) {
@@ -150,6 +152,10 @@ function Context(options) {
 
   this.getCustomKeys = function() {
     return Object.keys(customData);
+  };
+
+  this.hasURL = function () {
+    return webURLRegex.test(this.text());
   };
 
   this.instance = function() {
