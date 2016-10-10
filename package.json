@@ -2,7 +2,7 @@
   "name": "akp48-context",
   "version": "0.0.2",
   "description": "Contexts for AKP48.",
-  "main": "Context.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "preversion": "git checkout master && git pull --ff-only",
