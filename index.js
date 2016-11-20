@@ -99,13 +99,23 @@ function Context(options) {
   var rawMessage = options.message || options.text;
 
   // Generated parameters.
-  var isCmd = options.isCommand || isCommand(commandDelimiters, text) || false;
-  var tempCommand = getCommand(commandDelimiters, text);
-  var command = tempCommand.command;
-  var tempArgs = parseArgs(tempCommand.args);
-  var args = tempArgs.prepared;
-  var rawArgs = tempArgs.raw;
-  var argText = tempCommand.args;
+  var isCmd = false;
+  var command = '';
+  var args = {};
+  var rawArgs = [];
+  var argText = '';
+
+  // if we don't have a string, we still want to send messages, but just use the
+  // default values above.
+  if(typeof text === 'string') {
+    isCmd = options.isCommand || isCommand(commandDelimiters, text) || false;
+    var tempCommand = getCommand(commandDelimiters, text);
+    command = tempCommand.command;
+    var tempArgs = parseArgs(tempCommand.args);
+    args = tempArgs.prepared;
+    rawArgs = tempArgs.raw;
+    argText = tempCommand.args;
+  }
 
   this.args = function() {
     return args;
